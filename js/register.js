@@ -11,7 +11,6 @@ var checkValidity = function () {
         pass2.style.borderColor = "red";
         return false;
     }
-    return true;
 }
 form.addEventListener('submit', function (evt) {
     evt.preventDefault();

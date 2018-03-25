@@ -1,6 +1,5 @@
 <?php
 include 'inc/config.php';
-var_dump($_SESSION['username']);
 ?>
 <!DOCTYPE html>
 <html>
