@@ -1,3 +1,7 @@
+<?php
+include 'inc/config.php';
+var_dump($_SESSION['username']);
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,10 +35,20 @@
 	<div class="col_12 column">
 		<!-- Menu Horizontal -->
 		<ul class="menu">
-		<li class="current"><a href="index.html"><i class="icon-home"></i> Home</a></li>
+		<li class="current"><a href="index.php"><i class="icon-home"></i> Home</a></li>
 		<li><a href="jobs.html"><i class="icon-desktop"></i> Browse Jobs</a></li>
-		<li><a href="register.html"><i class="icon-user"></i> Register</a></li>
-		<li><a href="login.html"><i class="icon-key"></i> Login</a></li>
+        <?if(!isset($_SESSION['username'])) {
+            echo "
+		    <li><a href='register.html'><i class='icon-user'></i> Register</a></li>
+		    <li><a href='login.html'><i class='icon-key'></i> Login</a></li>
+           ";
+        }
+        else{
+            echo "
+            <li><a href='exit.php'>Выход</a></li>
+            ";
+        }
+        ?>
 		</ul>
 	</div>
 	
