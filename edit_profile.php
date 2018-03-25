@@ -10,7 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
  Email = '{$_POST['email']}', Gender = '{$_POST['gender']}', Phone_number = '{$_POST['phone_number']}' WHERE Username='{$_SESSION['username']}'");
 
     $_SESSION['all']=$con -> query("SELECT * FROM users WHERE Username='{$_SESSION['username']}'") -> fetch_assoc();
-    //header('Location: ../index.php');
+    header('Location: ../index.php');
 }
 ?>
 <!DOCTYPE html>
