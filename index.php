@@ -45,6 +45,7 @@ var_dump($_SESSION['username']);
         }
         else{
             echo "
+            <li><a href='edit_profile.php'>Редактировать профиль</a></li>
             <li><a href='Scripts/exit.php'>Выход</a></li>
             ";
         }
