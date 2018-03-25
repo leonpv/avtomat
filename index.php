@@ -23,7 +23,7 @@ var_dump($_SESSION['username']);
 <div id="container" class="grid">
 	<header>
 		<div class="col_6 column">
-			<h1><a href="index.html"><strong>Job</strong>Finds</a></h1>
+			<h1><a href="index.php"><strong>Job</strong>Finds</a></h1>
 		</div>
 		<div class="col_6 column right">
 			<form id="add_job_link">
@@ -45,7 +45,7 @@ var_dump($_SESSION['username']);
         }
         else{
             echo "
-            <li><a href='exit.php'>Выход</a></li>
+            <li><a href='Scripts/exit.php'>Выход</a></li>
             ";
         }
         ?>
