@@ -49,7 +49,7 @@ $job=mysqli_fetch_all($con->query("SELECT * FROM Job WHERE id='{$_GET['id']}'"),
 	</div>
 	
 		<div class="col_12 column">
-			<h3>Senior Graphic Designer</h3>
+			<h3><?$job['Name']?></h3>
 			<ul>
 				<li><strong>Location:</strong> Burlington, MA</li>
 				<li><strong>Job Type:</strong> Full Time</li>
