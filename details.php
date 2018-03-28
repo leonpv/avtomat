@@ -6,7 +6,8 @@ if ($_SESSION['all']['id']==10){
 else{
     $_SESSION['i']=10;
 }
-$job=mysqli_fetch_all($con->query("SELECT * FROM Job WHERE id='{$_GET['id']}'"), MYSQLI_ASSOC);
+$job=mysqli_fetch_all($con->query("SELECT * FROM Job WHERE id='{$_GET['id']}'"), MYSQLI_ASSOC)[0];
+$email=mysqli_fetch_assoc($con->query("SELECT Email From users WHERE Username='{$job['Author']}'"))['Email'];
 ?>
 <!DOCTYPE html>
 <html>
@@ -51,11 +52,10 @@ $job=mysqli_fetch_all($con->query("SELECT * FROM Job WHERE id='{$_GET['id']}'"),
 		<div class="col_12 column">
 			<h3><?$job['Name']?></h3>
 			<ul>
-				<li><strong>Location:</strong> Burlington, MA</li>
-				<li><strong>Job Type:</strong> Full Time</li>
-				<li><strong>Description:</strong> <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse dapibus risus at dapibus malesuada. Vestibulum euismod, velit sit amet tempor ornare, nulla augue mattis mi, nec ultricies dolor augue nec lectus. Integer bibendum enim ipsum, at eleifend nisl elementum sit amet. Etiam eget magna et nunc ultrices suscipit. Duis a ligula vel nisi auctor laoreet. Morbi varius suscipit purus, sed pretium nisl sagittis id. Aliquam vel nulla tempor, luctus quam nec, egestas sem. Nulla nulla ante, faucibus fringilla blandit non, porttitor at eros.</p>
-				<p>Cras luctus cursus pretium. Fusce rhoncus tortor at lectus dignissim, sed dignissim enim euismod. Pellentesque venenatis lacus diam. Nulla aliquam turpis vel lorem viverra consequat. Curabitur vitae vehicula lacus. Fusce quis imperdiet tortor. Fusce enim massa, tincidunt vel lobortis non, mattis quis turpis. Nam lobortis, lectus vitae iaculis bibendum, felis nulla consectetur leo, nec volutpat orci elit ut lorem. Nunc sagittis mauris quis tellus ullamcorper facilisis. Sed volutpat lacus in gravida condimentum. Maecenas sit amet massa vel neque suscipit porta. In luctus odio ante, a scelerisque tellus imperdiet id. Nunc in mollis lectus. Nam lobortis dui lorem, nec lacinia erat pellentesque non. In mattis eget massa sit amet elementum.</p></li>
-				<li><strong>Contact Email:</strong> <a href="mailto:employer@somecompany.com?Subject=Job%20Applicant" target="_top">employer@somecompany.com</a></li>
+				<li><strong>Location: </strong><?=$job['Location']?></li>
+				<li><strong>Job Type: </strong><?=$job['Type']?></li>
+				<li><strong>Description: </strong> <p><?=$job['Description']?></p></li>
+				<li><strong>Contact Email:</strong> <a href="mailto:<?=$email?>?Subject=Job%20Applicant" target="_top"><?=$email?></a></li>
 			</ul>
 			<p><a href="jobs.html">Back To Jobs</a></p>
             <a href="chat.php?user1=<?=$_SESSION['all']['id']?>&user2=<?=$_SESSION['i']?>">Написать сообщение</a>
