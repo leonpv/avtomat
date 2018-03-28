@@ -50,13 +50,14 @@ $email=mysqli_fetch_assoc($con->query("SELECT Email From users WHERE Username='{
 	</div>
 	
 		<div class="col_12 column">
-			<h3><?$job['Name']?></h3>
+			<h3><?=$job['Name']?></h3>
 			<ul>
 				<li><strong>Location: </strong><?=$job['Location']?></li>
 				<li><strong>Job Type: </strong><?=$job['Type']?></li>
 				<li><strong>Description: </strong> <p><?=$job['Description']?></p></li>
 				<li><strong>Contact Email:</strong> <a href="mailto:<?=$email?>?Subject=Job%20Applicant" target="_top"><?=$email?></a></li>
 			</ul>
+            <p><a href="edit_post.php?id=2">Редактировать пост</a></p>
 			<p><a href="jobs.html">Back To Jobs</a></p>
             <a href="chat.php?user1=<?=$_SESSION['all']['id']?>&user2=<?=$_SESSION['i']?>">Написать сообщение</a>
 		</div>
