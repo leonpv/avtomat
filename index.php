@@ -1,5 +1,6 @@
 <?php
 include 'inc/config.php';
+$jobs=mysqli_fetch_all($con->query("SELECT * FROM Job"), MYSQLI_ASSOC);
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,9 +26,9 @@ include 'inc/config.php';
 			<h1><a href="index.php"><strong>Job</strong>Finds</a></h1>
 		</div>
 		<div class="col_6 column right">
-			<form id="add_job_link">
-				<button class="large green"><i class="icon-plus"></i>Add Job</button>
-			</form>
+            <form id="add_job_link" action="add_job.html">
+                <button type="submit" class="large green"><i class="icon-plus"></i>Add Job</button>
+            </form>
 		</div>
 	</header>
 	
@@ -125,46 +126,27 @@ include 'inc/config.php';
 		<div class="col_12 column">
 			<h3>Latest Job Listings</h3>
 			<ul id="listings">
-				<li>
-					<div class="type">
-						<span class="green">Full Time</span>
-					</div>
-					<div class="description">
-						<h5>Senior Graphic Designer (Burlington, MA)</h5>
-						Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt 
-						ut laoreet dolore magna aliquam erat volutpat.<a href="details.html"> <i class="icon-plus"></i> Read More</a>
-					</div>
-				</li>
-				<li>
-					<div class="type">
-						<span class="green">Full Time</span>
-					</div>
-					<div class="description">
-						<h5> UX Designer (Newburyport, MA)</h5>
-						Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt 
-						ut laoreet dolore magna aliquam erat volutpat.<a href="details.html"> <i class="icon-plus"></i> Read More</a>
-					</div>
-				</li>
-				<li>
-					<div class="type">
-						<span class="blue">Part Time</span>
-					</div>
-					<div class="description">
-						<h5>Registered Nurse (Brooklyn, NY)</h5>
-						Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt 
-						ut laoreet dolore magna aliquam erat volutpat.<a href="details.html"> <i class="icon-plus"></i> Read More</a>
-					</div>
-				</li>
-				<li>
-					<div class="type">
-						<span class="green">Full Time</span>
-					</div>
-					<div class="description">
-						<h5>House Painter(Boston, MA)</h5>
-						Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt 
-						ut laoreet dolore magna aliquam erat volutpat.<a href="details.html"> <i class="icon-plus"></i> Read More</a>
-					</div>
-				</li>
+                <? foreach ($jobs as $job) {
+                    echo "
+                        <li>
+                            <div class='type'>
+                    ";
+                    if ($job['Type'] == "Full Time") {
+                        echo "<span class='green'>Full Time</span>";
+                    } else {
+                        echo "<span class='blue'>Part Time</span>";
+                    }
+                    echo "
+                            </div>
+                            <div class='description'>
+                                <h5>{$job['Name']} ({$job['Location']})</h5>{$job['Description']}
+                                <a href='details.php?id={$job['id']}'> <i class='icon-plus'></i> Read More</a>
+                            </div>
+                        </li>
+                    ";
+                }
+                ?>
+
 			</ul>
 		</div>
 		

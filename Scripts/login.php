@@ -1,6 +1,6 @@
 <?php
 include '../inc/config.php';
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+if ($_SERVER['REQUEST_METHOD'] == 'POST'&&$_POST["g-recaptcha-response"]!="") {
     $hach=$con -> query("SELECT Password FROM users WHERE Username='{$_POST['username']}'") -> fetch_assoc()['Password'];
     if(password_verify($_POST['password'],$hach)){
         $_SESSION['username']=$_POST['username'];
@@ -10,4 +10,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     else{
         header('Location: ../login.html');
     }
+}
+else{
+    header('Location: ../login.html');
 }
