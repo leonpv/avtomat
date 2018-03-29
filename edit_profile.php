@@ -43,7 +43,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         <!-- Menu Horizontal -->
         <ul class="menu">
             <li class="current"><a href="index.php"><i class="icon-home"></i> Home</a></li>
-            <li><a href="jobs.html"><i class="icon-desktop"></i> Browse Jobs</a></li>
+            <li><a href="jobs.php"><i class="icon-desktop"></i> Browse Jobs</a></li>
         </ul>
     </div>
 

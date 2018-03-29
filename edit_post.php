@@ -1,13 +1,11 @@
 <?php
 include "inc/config.php";
-if ($_SESSION['all']['id']==10){
-    $_SESSION['i']=9;
+if ($_SERVER['REQUEST_METHOD'] == 'POST'){
+    $con -> query("UPDATE Job SET Name = '{$_POST['Name']}', Location = '{$_POST['Location']}', Type = '{$_POST['Type']}',
+ Category = '{$_POST['Category']}', Description = '{$_POST['Description']}' WHERE id = '{$_GET['id']}'");
+    header("Location: edit_post.php?id={$_GET['id']}");
 }
-else{
-    $_SESSION['i']=10;
-}
-$job=mysqli_fetch_all($con->query("SELECT * FROM Job WHERE id='{$_GET['id']}'"), MYSQLI_ASSOC)[0];
-$email=mysqli_fetch_assoc($con->query("SELECT Email From users WHERE Username='{$job['Author']}'"))['Email'];
+$jobc=mysqli_fetch_all($con->query("SELECT * FROM Job WHERE id='{$_GET['id']}'"), MYSQLI_ASSOC)[0];
 ?>
 <!DOCTYPE html>
 <html>
@@ -43,28 +41,28 @@ $email=mysqli_fetch_assoc($con->query("SELECT Email From users WHERE Username='{
         <!-- Menu Horizontal -->
         <ul class="menu">
             <li class="current"><a href="index.php"><i class="icon-home"></i> Home</a></li>
-            <li><a href="jobs.html"><i class="icon-desktop"></i> Browse Jobs</a></li>
+            <li><a href="jobs.php"><i class="icon-desktop"></i> Browse Jobs</a></li>
             <li><a href="register.html"><i class="icon-user"></i> Register</a></li>
             <li><a href="login.html"><i class="icon-key"></i> Login</a></li>
         </ul>
     </div>
 
     <div class="col_12 column">
-        <form id="edd_job_form" method="post" action="save_edited_post.php">
+        <form id="edd_job_form" method="post">
             <fieldset>
-                <legend>Add Job</legend>
+                <legend>Edit Job</legend>
                 <p>
                     <label for="Name">Name</label>
-                    <input id="Name" type="text" name="Name" value=<?=$job['Name']?> required>
+                    <input id="Name" type="text" name="Name" value=<?=$jobc['Name']?> required>
                 </p>
                 <p>
                     <label for="Description<">Description</label>
-                    <input id="Description<" type="text" name="Description" value=<?=$job['Description']?> required>
+                    <input id="Description<" type="text" name="Description" value=<?=$jobc['Description']?> required>
                 </p>
                 <p>
                     <label for="Type">Type</label>
                     <select id="Type" name="Type" required>
-                        <option value="<?=$job['Type']?>"><?=$job['Type']?></option>
+                        <option value="<?=$jobc['Type']?>"><?=$jobc['Type']?></option>
                         <option value="Full Time">Full Time</option>
                         <option value="Part Time">Part Time</option>
                     </select>
@@ -72,7 +70,7 @@ $email=mysqli_fetch_assoc($con->query("SELECT Email From users WHERE Username='{
                 <p>
                     <label for="state_select">Location</label>
                     <select id="state_select" name="Location" required>
-                        <option value="<?=$job['Location']?>"><?=$job['Location']?></option>
+                        <option value="<?=$jobc['Location']?>"><?=$jobc['Location']?></option>
                         <option value="Alabama">Alabama</option>
                         <option value="Alaska">Alaska</option>
                         <option value="Arizona">Arizona</option>
@@ -128,7 +126,7 @@ $email=mysqli_fetch_assoc($con->query("SELECT Email From users WHERE Username='{
                 <p>
                     <label for="category_select">Category</label>
                     <select id="category_select" name="Category" required>
-                        <option value="<?=$job['Category']?>"><?=$job['Category']?></option>
+                        <option value="<?=$jobc['Category']?>"><?=$jobc['Category']?></option>
                         <option value="Accounting & Banking">Accounting & Banking</option>
                         <option value="Construction">Construction</option>
                         <option value="Fashion & Style">Fashion & Style</option>

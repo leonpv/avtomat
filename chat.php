@@ -46,7 +46,7 @@ OR Sender='{$_SESSION['i']}' AND Recipient='{$_SESSION['all']['id']}' ORDER BY T
 		<!-- Menu Horizontal -->
 		<ul class="menu">
             <li class="current"><a href="index.php"><i class="icon-home"></i> Home</a></li>
-            <li><a href="jobs.html"><i class="icon-desktop"></i> Browse Jobs</a></li>
+            <li><a href="jobs.php"><i class="icon-desktop"></i> Browse Jobs</a></li>
             <li><a href='edit_profile.php'>Edit profile</a></li>
             <li><a href='Scripts/exit.php'>Exit</a></li>
 		</ul>

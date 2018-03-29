@@ -1,9 +1,8 @@
 <?php
 include 'inc/config.php';
-$jobs=mysqli_fetch_all($con->query("SELECT * FROM Job ORDER BY Time DESC LIMIT 5"), MYSQLI_ASSOC);
-include_once 'Scripts/search_for_index.php';
+$jobs=mysqli_fetch_all($con->query("SELECT * FROM Job"), MYSQLI_ASSOC);
+include_once 'Scripts/search_for_jobs.php';
 ?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,35 +26,35 @@ include_once 'Scripts/search_for_index.php';
 		<div class="col_6 column">
 			<h1><a href="index.php"><strong>Job</strong>Finds</a></h1>
 		</div>
-		<div class="col_6 column right">
+        <div class="col_6 column right">
             <form id="add_job_link" action="add_job.html">
                 <button type="submit" class="large green"><i class="icon-plus"></i>Add Job</button>
             </form>
-		</div>
+        </div>
 	</header>
-	
-	<div class="col_12 column">
-		<!-- Menu Horizontal -->
-		<ul class="menu">
-		<li class="current"><a href="index.php"><i class="icon-home"></i> Home</a></li>
-		<li><a href="jobs.php"><i class="icon-desktop"></i> Browse Jobs</a></li>
-        <?if(!isset($_SESSION['username'])) {
-            echo "
+
+    <div class="col_12 column">
+        <!-- Menu Horizontal -->
+        <ul class="menu">
+            <li class="current"><a href="index.php"><i class="icon-home"></i> Home</a></li>
+            <li><a href="jobs.php"><i class="icon-desktop"></i> Browse Jobs</a></li>
+            <?if(!isset($_SESSION['username'])) {
+                echo "
 		    <li><a href='register.html'><i class='icon-user'></i> Register</a></li>
 		    <li><a href='login.html'><i class='icon-key'></i> Login</a></li>
            ";
-        }
-        else{
-            echo "
+            }
+            else{
+                echo "
             <li><a href='edit_profile.php'>Edit profile</a></li>
             <li><a href='Scripts/exit.php'>Exit</a></li>
             ";
-        }
-        ?>
-		</ul>
-	</div>
-	
-	<div id="search_area" class="col_12 column">
+            }
+            ?>
+        </ul>
+    </div>
+
+    <div id="search_area" class="col_12 column">
         <form class="horizontal" method="post">
             <input id="keywords" type="text" placeholder="Enter Keywords..." name="Text" />
             <select id="state_select" name="Location" >
@@ -110,35 +109,35 @@ include_once 'Scripts/search_for_index.php';
                 <option value="West Virginia">West Virginia</option>
                 <option value="Wisconsin">Wisconsin</option>
                 <option value="Wyoming">Wyoming</option>
-				</select>
-                <select id="category_select" name="Category" >
-                    <option value="">Select Category</option>
-                    <option value="Accounting & Banking">Accounting & Banking</option>
-                    <option value="Construction">Construction</option>
-                    <option value="Fashion & Style">Fashion & Style</option>
-                    <option value="Food & Restaurant">Food & Restaurant</option>
-                    <option value="Healthcare">Healthcare</option>
-                    <option value="Retail & Sales">Retail & Sales</option>
-                    <option value="Technology">Technology</option>
-				</select>
-				<button type="submit">Submit</button>
-			</form>
-		</div>
-		
-		<div class="col_12 column">
-			<h3>Latest Job Listings</h3>
-			<ul id="listings">
-                <? foreach ($jobs as $job) {
-                    echo "
+            </select>
+            <select id="category_select" name="Category" >
+                <option value="">Select Category</option>
+                <option value="Accounting & Banking">Accounting & Banking</option>
+                <option value="Construction">Construction</option>
+                <option value="Fashion & Style">Fashion & Style</option>
+                <option value="Food & Restaurant">Food & Restaurant</option>
+                <option value="Healthcare">Healthcare</option>
+                <option value="Retail & Sales">Retail & Sales</option>
+                <option value="Technology">Technology</option>
+            </select>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+
+    <div class="col_12 column">
+        <h3>Latest Job Listings</h3>
+        <ul id="listings">
+            <? foreach ($jobs as $job) {
+                echo "
                         <li>
                             <div class='type'>
                     ";
-                    if ($job['Type'] == "Full Time") {
-                        echo "<span class='green'>Full Time</span>";
-                    } else {
-                        echo "<span class='blue'>Part Time</span>";
-                    }
-                    echo "
+                if ($job['Type'] == "Full Time") {
+                    echo "<span class='green'>Full Time</span>";
+                } else {
+                    echo "<span class='blue'>Part Time</span>";
+                }
+                echo "
                             </div>
                             <div class='description'>
                                 <h5>{$job['Name']} ({$job['Location']})</h5>{$job['Description']}
@@ -146,16 +145,16 @@ include_once 'Scripts/search_for_index.php';
                             </div>
                         </li>
                     ";
-                }
-                ?>
+            }
+            ?>
 
-			</ul>
-		</div>
-		
-		<div class="clearfix"></div>
-		<footer>
-			<p>Copyright @copy; 2018, JobFinds, All Rights Reserved</p>
-		</footer>
+        </ul>
+    </div>
+
+    <div class="clearfix"></div>
+    <footer>
+        <p>Copyright @copy; 2018, JobFinds, All Rights Reserved</p>
+    </footer>
 </div> <!-- End Grid -->
 </body>
 </html>
